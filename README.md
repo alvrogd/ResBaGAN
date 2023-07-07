@@ -93,7 +93,7 @@ For convenience, the code is locally stored and is provided to the Docker contai
 Therefore, you need to download or clone this repository:
 
 ```
-$ git clone https://github.com/alvrogd/ResBaGAN.git
+git clone https://github.com/alvrogd/ResBaGAN.git
 ```
 
 ### Installing the container
@@ -101,7 +101,8 @@ $ git clone https://github.com/alvrogd/ResBaGAN.git
 You can build the Docker image locally by running the script `dockerfiles/build_container.sh`:
 
 ```
-$ bash dockerfiles/build_container.sh
+cd dockerfiles/
+bash build_container.sh
 ```
 
 Please be aware that the resulting image is large (~14.2 GB), so it will take some time to download all the required
@@ -159,7 +160,7 @@ Feel free to change any other parameters as needed. You can now launch the conta
 by running:
 
 ```
-$ ./launch_container.sh bash
+./launch_container.sh bash
 ```
 
 
