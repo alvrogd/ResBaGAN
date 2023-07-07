@@ -1,0 +1,84 @@
+# Copyright 2023 Álvaro Goldar Dieste
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#     http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+preprocess_dataset:
+
+    description: Reads and preprocesses a given dataset for classification
+    main: preprocess_dataset
+    flags-dest: args
+    flags-import: all
+    output-scalars: no
+    requires:
+        - file: datasets/
+    sourcecode:
+        - datasets_helper.cpp
+        - datasets.py
+        - preprocess_dataset.py
+
+
+run_network:
+
+    description: Trains a certain network on a given dataset and evaluates its performance
+    main: run_network
+    flags-dest: args
+    flags-import: all
+    flags-import-skip:
+        - device
+    output-scalars:
+        - step: 'Training epoch: (\step)'
+        - dis_avg-loss: 'Dis.+ loss \(average\): (\value)'
+        - dis_real-loss: 'Dis.+ loss \(real images\): (\value)'
+        - dis_fake-loss: 'Dis.+ loss \(fake images\): (\value)'
+        - gen_loss: 'Gen.+ loss: (\value)'
+        - standalone_loss: 'Mean loss: (\value)'
+        - val_acc: 'Val.+ accuracy: (\value)'
+        - oa: '\(OA\): (\value)'
+        - aa: '\(AA\): (\value)'
+        - kappa: 'Cohen.+ \(k\): (\value)'
+    requires:
+        - operation: preprocess_dataset
+    sourcecode:
+        - datasets_helper.cpp
+        - datasets.py
+        - networks.py
+        - run_network.py
+
+
+test_synthesis:
+
+    description: Tests the synthesis performance of a pretrained GAN network on a given dataset
+    main: test_synthesis
+    flags-dest: args
+    flags-import: all
+    flags-import-skip:
+        - activation
+        - data_augmentation
+        - dataset_path
+        - device
+        - epochs
+        - latent_size
+        - learning_rate
+        - p_dropout
+        - weight_init
+    output-scalars:
+        - fid: 'FID score: (\value)'
+    requires:
+        - file: CNN2D_Residual_model.pt
+        - operation: run_network
+    sourcecode:
+        - datasets_helper.cpp
+        - datasets.py
+        - networks.py
+        - test_synthesis.py

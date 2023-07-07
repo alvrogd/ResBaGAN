@@ -1,0 +1,8 @@
+ResBaGAN
+Code release for "ResBaGAN: A Residual Balancing GAN with Data Augmentation
+for Forest Mapping," doi: 10.1109/JSTARS.2023.3281892
+Copyright 2023 Álvaro Goldar Dieste
+
+The FID score assessment (test_synthesis.py) includes code from
+https://github.com/mseitzer/pytorch-fid (Apache 2.0 licensed) used and
+modified under the terms of the same license.
