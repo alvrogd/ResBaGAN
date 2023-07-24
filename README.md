@@ -548,9 +548,9 @@ If you find this work useful, please consider citing it:
   journal={IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing}, 
   title={ResBaGAN: A Residual Balancing GAN with Data Augmentation for Forest Mapping}, 
   year={2023},
-  volume={},
+  volume={16},
   number={},
-  pages={1-21},
+  pages={6428-6447},
   doi={10.1109/JSTARS.2023.3281892}
 }
 ```
